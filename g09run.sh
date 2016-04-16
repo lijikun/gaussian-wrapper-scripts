@@ -15,7 +15,7 @@ then
             outputfile=${1/${BASH_REMATCH[0]}/\.log}
             g09 $1
             echo "Mailing output to $2...."
-            tail $output | mail $2 -s "G09 job $1 result"            
+            tail $outputfile | mail $2 -s "G09 job $1 result"            
         else
             echo "Input must have extension of .com or .gjf"
             exit 2
@@ -26,6 +26,7 @@ then
     fi
 else
     echo "G09 is not initialized."
+    exit 255
 fi
 
 
