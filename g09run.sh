@@ -14,8 +14,12 @@ then
             echo "Running: g09 $1...."
             outputfile=${1/${BASH_REMATCH[0]}/\.log}
             g09 $1
-            echo "Mailing output to $2...."
-            tail $outputfile | mail $2 -s "G09 Job $1 Result"            
+            if which mail
+            then
+                echo "Mailing output to $2...."
+                tail $outputfile | mail $2 -s "G09 Job $1 Result"                       else
+                echo "No mail program. Mailing skipped."
+            fi
         else
             echo "Input must have extension of .com or .gjf."
             exit 2
