@@ -12,12 +12,12 @@ then
         if [[ "$1" =~ $extension ]]
         then
             echo "Running: g09 $1...."
-            outputfile=${1/%${BASH_REMATCH[0]}/\.log}
+            outputFile="${1/%${BASH_REMATCH[0]}/\.log}"
             g09 "$1"
             if [[ "$2" ]] && which mail
             then
                 echo "Mailing output to $2...."
-                tail $outputfile | mail $2 -s "G09 Job $1 Result"                       
+                tail $outputFile | mail $2 -s "G09 Job $1 Result"                       
             else
                 echo "Email not specified. Skipped mailing."
             fi

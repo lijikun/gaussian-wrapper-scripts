@@ -33,7 +33,7 @@ For example, supposing you have in current directory the script, the template, a
         ./g09template.sh template-sample-opt.gjf mol* -n 8
         
         
-And it will generate files automatically named like `mol-a_template-sample-opt.gjf`. The checkpoint files will be named accordingly. The script file is unspecified so it will be automatically named `g09_template-sample-opt.gjf.sh`, and made executable.
+And it generates auto-named files like `mol-a.xyz_template-sample-opt.gjf`. The checkpoint files will be named accordingly. The script file is unspecified so it will be automatically named `g09_template-sample-opt.gjf.sh`, and made executable.
 
 
 ## g09run.sh

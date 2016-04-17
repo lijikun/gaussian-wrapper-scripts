@@ -75,9 +75,9 @@ for x in ${coords}; do
                 # Then deletes all empty lines at the beginning and the end.
                 sed "${x}" \
                     -e '/^[[:space:]]*[0-9]\+[[:space:]]*$/d' \
-                    -e '/./,$!d' \
+                    -e '/[[:alnum:]]/,$!d' \
                     | tac \
-                    | sed -e '/./,$!d' \
+                    | sed -e '/[[:alnum:]]/,$!d' \
                     | tac
                 ;;
             *)
