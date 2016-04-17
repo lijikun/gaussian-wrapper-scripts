@@ -1,0 +1,8 @@
+!chkfile!
+!nprocs!
+
+# b3lyp/6-311+G(2d,p) opt freq scf=(verytight,diis,xqc) integral=(grid=ultrafine) 
+
+!title!
+
+!coordinates!

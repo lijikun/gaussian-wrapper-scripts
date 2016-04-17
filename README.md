@@ -30,4 +30,4 @@ How to write a template:
 
  5. Replace charge, multiplicity and molecule definition with `!coordinates!`
 
-See `sample-template.gjf` for a sample.
+See `coord2input-sample-template.gjf` for a sample.
