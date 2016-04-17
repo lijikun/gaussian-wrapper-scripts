@@ -1,11 +1,9 @@
 #!/bin/bash
 #
 # Batch-generates g09 input files from coordinates and a template
-# Usage: coord2input.sh templatefile coordfile1 [coordfile2 ...] [-c charge] [-m multiplicity] [-s invoking-script] [-n number-of-processors]
+# Usage: coord2input.sh templatefile coordfile1 [coordfile2 ...] [-n number-of-processors] [-s invoking-script] 
 
 # Default parameters:
-charge=0
-multiplicity=1
 scriptName="g09batch.sh"
 nProcs=1
 template=
@@ -15,24 +13,6 @@ scriptCommand="g09"
 # Processes command line arguments:
 while [[ $1 ]]; do
     case "$1" in
-        -c)
-            isCharge='^-?[0-9]+$'
-            if [[ $2 && $2 =~ $isCharge ]]; then
-                charge=$2
-                shift 2;
-            else
-                echo "Warning: Invalid charge $2. Default to ${charge}."
-                shift;
-            fi;;
-        -m)
-            isMultiplicity='^0*[1-9][0-9]*$'
-            if [[ $2 && $2 =~ $isMultiplicity ]];then
-                multiplicity=$2
-                shift 2
-            else
-                echo "Warning: Invalid multiplicity $2. Default to ${multiplicity}."
-                shift
-            fi;;
         -s)
             if [[ "$2" ]]; then
                 scriptName=$2
@@ -69,7 +49,6 @@ done
 
 # Generates g09 input files:
 echo "#Processors = ${nProcs}"
-echo "Charge = ${charge}    Multiplicity = ${multiplicity}"
 echo "Template file: ${template}"
 echo
 echo "Generated input files:"
@@ -95,7 +74,6 @@ do
             !title!)
                 echo ${inputFile} ;;
             !coordinates!)
-                echo "${charge}    ${multiplicity}"
                 [[ $discardLine ]] || discardLine='^[0-9]*$'
                 cat $x | while read coordLine; do
                     [[ $coordLine =~ $discardLine ]] || echo ${coordLine}
