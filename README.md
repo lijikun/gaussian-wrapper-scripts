@@ -29,4 +29,5 @@ How to write a template:
  4. Replace comment line with `!title!`
 
  5. Replace charge, multiplicity and molecule definition with `!coordinates!`
+
 See `sample-template.gjf` for a sample.
