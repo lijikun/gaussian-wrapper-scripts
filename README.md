@@ -21,7 +21,7 @@ How to write a template:
 
  4. Put `!title!` for the comment line.
 
- 5. Put `!coordinates!` where the molecule definition is.
+ 5. Put `!coordinates!` where the molecule definition should be.
  
  6. You can put the line for charge and multiplicity (fragment charge/multiplicity, too) in either (but not both)
  
@@ -29,8 +29,11 @@ How to write a template:
         
     * The molecule definition files (if there are differenct charges, etc. among molecules)
 
+See [`g09template-sample-opt.gjf`] for a sample template. You can use it like this (supposing you have `a.xyz`, `b.xyz` and `c.xyz`):
 
-Basically, the template defines the model chemistry, basis sets, optimization, etc. that you want to apply to all the molecules, and the atomic coordinates are defined in respective molecule files.
+        ./g09template.sh g09template-sample-opt.gjf *.xyz -s run-opt.sh -n 8
+
+Basically, the template defines the model chemistry, basis sets, optimization, etc., that you want to apply to all the molecules, and the molecules' atomic coordinates are defined in respective files.
 
 
 What it does:
@@ -43,9 +46,11 @@ What it does:
  
  4. Replaces `!coordinates!` with the real molecule definition.
  
- 5. Generates a Bash script for running g09 with all the input files generated.
+ 5. Add an empty line to the end of each input file if it doesn't have one.
  
-See [`coord2input-sample-template.gjf`](coord2input-sample-template.gjf) for a sample template.
+ 6. Generates a Bash script for running g09 with all the input files generated. Makes it executable.
+ 
+
 
 
 ## g09run.sh
