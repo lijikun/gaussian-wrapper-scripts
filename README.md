@@ -15,15 +15,15 @@ See [`template-sample-opt.gjf`](template-sample-opt.gjf) for a sample template. 
 
 How to write a template:
 
- 1. Write a file as if it's a normal g09 input file.
+ 1. Write a file as if it's a normal g09 input file. Define model chemistry, basis set, optimization, multistep, etc.
 
- 2. Put `!chkfile!` for the line that specifies the checkpoint file name.
+ 2. Put `!chkfile!` for the line for checkpoint file name.
 
- 3. Put `!nprocs!` for the line with number of CPUs.
+ 3. Put `!nprocs!` for the line for number of CPUs.
 
- 4. Put `!title!` for a copy of the file name.
+ 4. Put `!title!` for a line to get a copy of the file name.
 
- 5. Put `!coordinates!` where the molecule definition should be.
+ 5. Put `!coordinates!` where the molecule definition should appear.
  
  6. You can put the line for charge, multiplicity, fragments, etc., in either the template or the molecule files.
  
