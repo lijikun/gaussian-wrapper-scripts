@@ -12,7 +12,7 @@ then
         if [[ $1 =~ $extension ]]
         then
             echo "Running: g09 $1...."
-            outputfile=${1/${BASH_REMATCH[0]}/\.log}
+            outputfile=${1/%${BASH_REMATCH[0]}/\.log}
             g09 $1
             if [[ $2 ]] && which mail
             then
