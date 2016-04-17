@@ -29,7 +29,7 @@ How to write a template:
         
     * The molecule definition files (if there are differenct charges, etc. among molecules)
 
-See [`g09template-sample-opt.gjf`] for a sample template. You can use it like this (supposing you have `a.xyz`, `b.xyz` and `c.xyz`):
+See [`g09template-sample-opt.gjf`](g09template-sample-opt.gjf) for a sample template. You can use it like this (supposing you have `a.xyz`, `b.xyz` and `c.xyz`):
 
         ./g09template.sh g09template-sample-opt.gjf *.xyz -s run-opt.sh -n 8
 
