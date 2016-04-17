@@ -16,7 +16,7 @@ Also generates a script file to run all the calculations.
 
 Usage:
 
-        ./coord2input.sh template coordinates1 [coordinates2 ...] [-c charge] [-m multiplicity] [-n number-of-processors] [-s script-file-name]
+        ./coord2input.sh template coordinates1 [coordinates2 ...] [-n number-of-processors] [-s script-file-name] [-c charge] [-m multiplicity] 
 
 How to write a template:
 
