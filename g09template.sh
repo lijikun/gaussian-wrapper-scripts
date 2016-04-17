@@ -70,7 +70,7 @@ for x in $coords; do
     { cat "$template" | while read templateLine; do
         case "$templateLine" in
             !chkfile!)
-                echo "%chk=${inputFile}.chk" ;;
+                echo "%chk=\"${inputFile}.chk\"" ;;
             !nprocs!)
                 echo "%nprocshared=${nProcs}" ;;
             !title!)

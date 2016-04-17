@@ -21,7 +21,7 @@ How to write a template:
 
  3. Put `!nprocs!` for the line with number of CPUs.
 
- 4. Put `!title!` for the comment line.
+ 4. Put `!title!` for a copy of the name of a specific input file.
 
  5. Put `!coordinates!` where the molecule definition should be.
  
