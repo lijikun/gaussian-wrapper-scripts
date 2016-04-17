@@ -11,7 +11,7 @@ Step 1:
 
 --link1--
 !chkfile!
-!nprocs!
+%nprocshared=2
 
 # b3lyp/6-311++G(2d,2p) geom=allcheck integral=(grid=ultrafine) scf=(verytight,diis,xqc) nmr
 
