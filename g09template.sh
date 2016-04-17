@@ -57,9 +57,9 @@ echo
 echo "Generated input files:"
 OLDIFS=$IFS
 IFS=$'\n'
-for x in $coords; do
+for x in ${coords}; do
     extension='\.\w*$'
-    baseName="$(basename $x)"
+    baseName="$(basename ${x})"
     if [[ "$baseName" =~ $extension ]]; then
         title="${baseName%${BASH_REMATCH[0]}}"
     else
@@ -76,10 +76,15 @@ for x in $coords; do
             !title!)
                 echo "${inputFile}" ;;
             !coordinates!)
-                [[ $discardLine ]] || discardLine='^[0-9]*$'
-                cat $x | while read coordLine; do
-                    [[ $coordLine =~ $discardLine ]] || echo "${coordLine}"
-                done ;;
+                # First deletes all lines with a single number.
+                # Then deletes all empty lines at the beginning and the end.
+                sed "${x}" \
+                    -e '/^[[:space:]]*[0-9]\+[[:space:]]*$/d' \
+                    -e '/./,$!d' \
+                    | tac \
+                    | sed -e '/./,$!d' \
+                    | tac
+                ;;
             *)
                 echo "${templateLine}" ;;
         esac

@@ -7,14 +7,14 @@ extension='.com$|.gjf$'
 
 if which g09
 then
-    if [[ -f $1 ]]
+    if [[ -f "$1" ]]
     then
-        if [[ $1 =~ $extension ]]
+        if [[ "$1" =~ $extension ]]
         then
             echo "Running: g09 $1...."
             outputfile=${1/%${BASH_REMATCH[0]}/\.log}
-            g09 $1
-            if [[ $2 ]] && which mail
+            g09 "$1"
+            if [[ "$2" ]] && which mail
             then
                 echo "Mailing output to $2...."
                 tail $outputfile | mail $2 -s "G09 Job $1 Result"                       
