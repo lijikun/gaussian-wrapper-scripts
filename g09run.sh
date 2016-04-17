@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Runs g09 and emails last ten lines of result when finished.
-# Usage: g09run [input filename] [email] 
+# Runs g09 and sends last ten lines of result by email when finished.
+# Usage: g09run input-filename [email] 
 
 extension='.com$|.gjf$'
 
@@ -17,8 +17,9 @@ then
             if [[ $2 ]] && which mail
             then
                 echo "Mailing output to $2...."
-                tail $outputfile | mail $2 -s "G09 Job $1 Result"                       else
-                echo "Mailing skipped."
+                tail $outputfile | mail $2 -s "G09 Job $1 Result"                       
+            else
+                echo "Email not specified. Skipped mailing."
             fi
         else
             echo "Input must have extension of .com or .gjf."
