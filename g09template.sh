@@ -45,7 +45,7 @@ while [[ "$1" ]]; do
 done
 [[ $template ]] || { echo "Error: No template file specified."; exit 1; }
 [[ $coords ]] || { echo "Error: No molecule coordinate file(s) specified."; exit 1; }
-[[ $scriptName ]] || scriptName="${template}.sh"
+[[ $scriptName ]] || scriptName="g09_$(basename ${template}).sh"
 
 
 # Generates g09 input files:
@@ -57,7 +57,7 @@ echo
 echo "Generated input files:"
 OLDIFS=$IFS
 IFS=$'\n'
-for x in "$coords"; do
+for x in $coords; do
     extension='\.\w*$'
     baseName="$(basename $x)"
     if [[ "$baseName" =~ $extension ]]; then
@@ -65,7 +65,7 @@ for x in "$coords"; do
     else
         title="$baseName"
     fi
-    inputFile="${title}_$(basename $template)"
+    inputFile="${title}_$(basename ${template})"
     [[ -f "${inputFile}" ]] && mv "${inputFile}" "${inputFile}.bak"
     { cat "$template" | while read templateLine; do
         case "$templateLine" in
@@ -86,7 +86,7 @@ for x in "$coords"; do
     done; } > "${inputFile}"
     # Adds an empty line to end of file if there isn't one in the template.
     [[ $(tail -n1 "${inputFile}") ]] && echo >> "$inputFile"
-    echo "${scriptCommand} ${inputFile}" >> "$scriptName"
+    echo "${scriptCommand} \"${inputFile}\"" >> "$scriptName"
     echo "  ${inputFile}"
 done
 IFS=$OLDIFS
