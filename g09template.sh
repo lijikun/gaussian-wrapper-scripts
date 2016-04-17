@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Batch-generates g09 input files from coordinates and a template
-# Usage: coord2input.sh templatefile coordfile1 [coordfile2 ...] [-n number-of-processors] [-s invoking-script] 
+# Usage: g09template.sh template molecule1 [molecule2 ...] [-n number-of-processors] [-s script-file] 
 
 # Default parameters:
 scriptName="g09batch.sh"
