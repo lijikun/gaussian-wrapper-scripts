@@ -1,12 +1,5 @@
 Gaussian 09 wrapper Bash scripts.
 
-## g09run.sh
-
-Runs a g09 calculation, and emails the last 10 lines of log when finished.
-
-Usage:
-
-        ./g09run.sh input-file [email-address]
 
 ## coord2input.sh
 
@@ -30,4 +23,13 @@ How to write a template:
 
  5. Replace charge, multiplicity and molecule definition with `!coordinates!`
 
-See `coord2input-sample-template.gjf` for a sample.
+See [`coord2input-sample-template.gjf`](coord2input-sample-template.gjf) for a sample template.
+
+
+## g09run.sh
+
+Runs a g09 calculation, and emails the last 10 lines of log when finished.
+
+Usage:
+
+        ./g09run.sh input-file [email-address]
