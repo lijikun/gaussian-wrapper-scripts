@@ -52,7 +52,7 @@ done
 echo "#Processors = ${nProcs}"
 echo "Template file: ${template}"
 echo
-[[ -f $scriptName ]] && mv "$scriptName" "${scriptName}.bak" && "${scriptName} backed up."
+[[ -f $scriptName ]] && mv "$scriptName" "${scriptName}.bak"
 { echo '#!/bin/bash'; echo; } > "$scriptName"
 echo "Generated input files:"
 OLDIFS=$IFS
@@ -66,6 +66,7 @@ for x in "$coords"; do
         title="$baseName"
     fi
     inputFile="${title}_$(basename $template)"
+    [[ -f "${inputFile}" ]] && mv "${inputFile}" "${inputFile}.bak"
     { cat "$template" | while read templateLine; do
         case "$templateLine" in
             !chkfile!)
