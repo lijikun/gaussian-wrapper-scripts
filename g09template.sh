@@ -44,8 +44,9 @@ while [[ "$1" ]]; do
     esac
 done
 [[ $template ]] || { echo "Error: No template file specified."; exit 1; }
+templateBase="$(basename ${template})"
 [[ $coords ]] || { echo "Error: No molecule coordinate file(s) specified."; exit 1; }
-[[ $scriptName ]] || scriptName="g09_$(basename ${template}).sh"
+[[ $scriptName ]] || scriptName="g09_${templateBase}.sh"
 
 
 # Generates g09 input files:
@@ -58,14 +59,8 @@ echo "Generated input files:"
 OLDIFS=$IFS
 IFS=$'\n'
 for x in ${coords}; do
-    extension='\.\w*$'
     baseName="$(basename ${x})"
-    if [[ "$baseName" =~ $extension ]]; then
-        title="${baseName%${BASH_REMATCH[0]}}"
-    else
-        title="$baseName"
-    fi
-    inputFile="${title}_$(basename ${template})"
+    inputFile="${baseName}_${templateBase}"
     [[ -f "${inputFile}" ]] && mv "${inputFile}" "${inputFile}.bak"
     { cat "$template" | while read templateLine; do
         case "$templateLine" in
