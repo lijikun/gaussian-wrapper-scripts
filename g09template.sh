@@ -18,7 +18,7 @@ while [[ "$1" ]]; do
                 scriptName="$2"
                 shift 2
             else
-                echo "Warning: No script file name specified."
+                echo "Warning: No script file name specified." >&2
                 shift
             fi;;
         -n)
@@ -27,7 +27,7 @@ while [[ "$1" ]]; do
                 nProcs=$2
                 shift 2
             else
-                echo "Warning: Invalid number of processors $2."
+                echo "Warning: Invalid number of processors $2." >&2
                 shift
             fi;;
         *)
@@ -38,14 +38,14 @@ while [[ "$1" ]]; do
                     template="$1"
                 fi
             else
-                echo "Warning: File $1 does not exist. Ignored."
+                echo "Warning: File $1 does not exist. Ignored." >&2
             fi
             shift;;
     esac
 done
-[[ $template ]] || { echo "Error: No template file specified."; exit 1; }
+[[ $template ]] || { echo "Error: No template file specified." >&2 ; exit 1; }
 templateBase="$(basename ${template})"
-[[ $coords ]] || { echo "Error: No molecule coordinate file(s) specified."; exit 1; }
+[[ $coords ]] || { echo "Error: No molecule coordinate file(s) specified." >&2 ; exit 1; }
 [[ $scriptName ]] || scriptName="g09_${templateBase}.sh"
 
 
