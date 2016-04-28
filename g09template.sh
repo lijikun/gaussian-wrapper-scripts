@@ -7,7 +7,7 @@
 scriptName=
 nProcs=1
 template=
-coords=
+coords=()
 scriptCommand="g09"
 
 # Processes command line arguments:
@@ -33,7 +33,7 @@ while [[ "$1" ]]; do
         *)
             if [[ -f "$1" ]]; then
                 if [[ "$template" ]]; then
-                    coords="${coords}"$'\n'"$1" 
+                    coords+=("$1") 
                 else
                     template="$1"
                 fi
@@ -56,9 +56,7 @@ echo
 [[ -f $scriptName ]] && mv "$scriptName" "${scriptName}.bak"
 { echo '#!/bin/bash'; echo; } > "$scriptName"
 echo "Generated input files:"
-OLDIFS=$IFS
-IFS=$'\n'
-for x in ${coords}; do
+for x in "${coords[@]}"; do
     baseName="$(basename ${x})"
     inputFile="${baseName}_${templateBase}"
     [[ -f "${inputFile}" ]] && mv "${inputFile}" "${inputFile}.bak"
@@ -89,7 +87,6 @@ for x in ${coords}; do
     echo "${scriptCommand} \"${inputFile}\"" >> "$scriptName"
     echo "  ${inputFile}"
 done
-IFS=$OLDIFS
 echo
 echo "Generated run script: ${scriptName}"
 chmod +x "$scriptName"
