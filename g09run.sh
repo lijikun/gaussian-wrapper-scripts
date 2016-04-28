@@ -9,7 +9,7 @@ if which g09
 then
     if [[ -f "$1" ]]
     then
-        if [[ "$1" =~ $extension ]]
+        if [[ "$1" =~ $extension ]]  # Regex for correct extensions of the files.
         then
             echo "Running: g09 $1...."
             outputFile="${1/%${BASH_REMATCH[0]}/\.log}"
@@ -19,18 +19,18 @@ then
                 echo "Mailing output to $2...."
                 tail $outputFile | mail $2 -s "G09 Job $1 Result"                       
             else
-                echo "Email not specified. Skipped mailing."
+                echo "Email not specified. Skipped mailing." >&2
             fi
         else
-            echo "Input must have extension of .com or .gjf."
+            echo "Input must have extension of .com or .gjf." >&2
             exit 2
         fi
     else
-        echo "Input $1 does not exist."
+        echo "Input $1 does not exist." >&2
         exit 1
     fi
 else
-    echo "G09 is not initialized."
+    echo "G09 is not initialized." >&2
     exit 255
 fi
 

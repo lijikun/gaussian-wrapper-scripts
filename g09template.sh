@@ -53,6 +53,7 @@ templateBase="$(basename ${template})"
 echo "#Processors = ${nProcs}"
 echo "Template file: ${template}"
 echo
+# Backs up files if already existing.
 [[ -e $scriptName ]] && mv "$scriptName" "${scriptName}.bak"
 { echo '#!/bin/bash'; echo; } > "$scriptName"
 echo "Generated input files:"
@@ -61,7 +62,7 @@ for x in "${coords[@]}"; do
     inputFile="${baseName}_${templateBase}"
     [[ -e "${inputFile}" ]] && mv "${inputFile}" "${inputFile}.bak"
     { cat "$template" | while read templateLine; do
-        case "$templateLine" in
+        case "$templateLine" in # Replaces tags with content.
             !chkfile!)
                 echo "%chk=\"${inputFile}.chk\"" ;;
             !nprocs!)
