@@ -38,7 +38,7 @@ And it generates auto-named files like `mol-a.xyz_template-sample-opt.gjf`. The 
 
 ## g09run.sh
 
-Runs a g09 calculation, and emails the last 10 lines of log when finished.
+Runs a g09 calculation, and emails the last 10 lines of log when finished. Requires e.g. postfix, exim or sendmail.
 
 Usage:
 
