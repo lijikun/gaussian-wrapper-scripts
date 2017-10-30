@@ -19,7 +19,7 @@ then
                 echo "Mailing output to $2...."
                 tail $outputFile | mail $2 -s "G09 Job $1 Result"                       
             else
-                echo "Email not specified. Skipped mailing." >&2
+                echo "Email address not specified or no "mail" command available. Skipping mailing." >&2
             fi
         else
             echo "Input must have extension of .com or .gjf." >&2
