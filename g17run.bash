@@ -5,7 +5,7 @@
 
 extension='.com$|.gjf$'
 exec_name="sbatch ${HOME}/.g17wrap.csh"
-user_name='your-user-name'
+user_name='your_user_name'
 sleep_interval=600
 
 if [[ -f "$1" ]]; then
@@ -15,8 +15,7 @@ if [[ -f "$1" ]]; then
         output_file="$1.log"
         job_id=$($exec_name "$1" | awk '{print $4}')
         echo "Job ID is ${job_id}"
-        if [[ "$2" ]] && echo "Using email client: "$(which mail)
-        then
+        if [[ "$2" ]] && echo "Using email client: "$(which mail) ; then
             while squeue -u $user_name | grep $job_id ; do
                     sleep $sleep_interval
             done
