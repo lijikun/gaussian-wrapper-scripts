@@ -1,4 +1,4 @@
-Gaussian 09 wrapper Bash scripts.
+Gaussian wrapper Bash scripts.
 
 
 ## g09template.sh
@@ -35,6 +35,15 @@ For example, supposing you have in current directory the script, the template, a
         
 And it generates auto-named files like `mol-a.xyz_template-sample-opt.gjf`. The checkpoint files will be named accordingly. The script file is unspecified so it will be automatically named `g09_template-sample-opt.gjf.sh`, and made executable.
 
+## g17run.bash
+
+For use in (Pittsburgh Supercomputing Center)[https://psc.edu/]. Submits a job and monitors the job, sending an email to designated address when the job is finished (i.e. out of the queue).
+
+Usage:
+
+        g17run.bash input-file [email-address]
+        
+Take care to edit the paramters at the start of the script.
 
 ## g09run.sh
 
@@ -42,4 +51,4 @@ Runs a g09 calculation, and emails the last 10 lines of log when finished. Requi
 
 Usage:
 
-        ./g09run.sh input-file [email-address]
+        g09run.sh input-file [email-address]
