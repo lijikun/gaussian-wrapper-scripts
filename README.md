@@ -37,7 +37,7 @@ And it generates auto-named files like `mol-a.xyz_template-sample-opt.gjf`. The 
 
 ## g17run.bash
 
-For use in (Pittsburgh Supercomputing Center)[https://psc.edu/]. Submits a job and monitors the job, sending an email to designated address when the job is finished (i.e. out of the queue).
+For use in [Pittsburgh Supercomputing Center](https://psc.edu/). Submits a job and monitors the job, sending an email to designated address when the job is finished (i.e. out of the queue).
 
 Usage:
 
