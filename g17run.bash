@@ -13,10 +13,11 @@ if [[ -f "$1" ]]; then
         echo "Running: $exec_name $1...."
         #outputFile="${1/%${BASH_REMATCH[0]}/\.log}"
         output_file="$1.log"
-        job_id=$($exec_name "$1" | awk '{print $4}')
+        job_id=$($exec_name "$1" | awk '{print $4}')    # Extracts job ID.
+        projects | grep "REGULAR MEMORY" --max-count=1 --after-context=4    # Queries for remaining machine hour allocation.
         echo "Job ID is ${job_id}"
         if [[ "$2" ]] && echo "Using email client: "$(which mail) ; then
-            while squeue -u $user_name | grep $job_id ; do
+            while squeue -u $user_name | grep $job_id ; do      # Tests if the job is still in the queue.
                     sleep $sleep_interval
             done
             echo "Mailing output to $2...."
