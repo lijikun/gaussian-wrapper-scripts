@@ -10,6 +10,14 @@ template=
 coords=()
 scriptCommand="g09"
 
+function makebak() {
+    if [[ -e "${1}" ]]; then
+        makebak "${1}.bak"
+        mv "${1}" "${1}.bak"
+        echo "Renamed old file ${1} to ${1}.bak"
+    fi
+}
+
 # Processes command line arguments:
 while [[ "$1" ]]; do
     case "$1" in
@@ -46,7 +54,7 @@ done
 [[ $template ]] || { echo "Error: No template file specified." >&2 ; exit 1; }
 templateBase="$(basename ${template})"
 [[ $coords ]] || { echo "Error: No molecule coordinate file(s) specified." >&2 ; exit 1; }
-[[ $scriptName ]] || scriptName="g09_${templateBase}.sh"
+[[ $scriptName ]] || scriptName="${scriptCommand}_${templateBase}.sh"
 
 
 # Generates g09 input files:
@@ -54,13 +62,15 @@ echo "#Processors = ${nProcs}"
 echo "Template file: ${template}"
 echo
 # Backs up files if already existing.
-[[ -e $scriptName ]] && mv "$scriptName" "${scriptName}.bak"
+#[[ -e $scriptName ]] && mv "$scriptName" "${scriptName}.bak"
+makebak "${scriptName}"
 { echo '#!/bin/bash'; echo; } > "$scriptName"
 echo "Generated input files:"
 for x in "${coords[@]}"; do
     baseName="$(basename ${x})"
-    inputFile="${baseName}_${templateBase}"
-    [[ -e "${inputFile}" ]] && mv "${inputFile}" "${inputFile}.bak"
+    inputFile="${baseName%.xyz}_${templateBase}"
+#    [[ -e "${inputFile}" ]] && mv "${inputFile}" "${inputFile}.bak"
+    makebak "${inputFile}"
     { cat "$template" | while read templateLine; do
         case "$templateLine" in # Replaces tags with content.
             !chkfile!)
